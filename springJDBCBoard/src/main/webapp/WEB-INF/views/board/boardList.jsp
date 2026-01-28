@@ -109,14 +109,83 @@
         color: #555;
         font-family: monospace;
     }
+    /* Search Bar Styles */
+    .search-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+        gap: 10px;
+    }
+
+    .search-form {
+        display: flex;
+        background: var(--t1-gray);
+        border: 1px solid #333;
+        border-radius: 5px;
+        padding: 5px;
+        transition: 0.3s;
+    }
+
+    .search-form:focus-within {
+        border-color: var(--t1-red);
+        box-shadow: 0 0 10px rgba(226, 1, 45, 0.3);
+    }
+
+    .search-select {
+        background: transparent;
+        color: var(--t1-gold);
+        border: none;
+        outline: none;
+        padding: 5px 10px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .search-input {
+        background: transparent;
+        border: none;
+        border-left: 1px solid #333;
+        color: white;
+        padding: 8px 15px;
+        width: 200px;
+        outline: none;
+    }
+
+    .btn-search {
+        background: transparent;
+        border: none;
+        color: var(--t1-red);
+        font-weight: 800;
+        cursor: pointer;
+        padding: 0 15px;
+        transition: 0.3s;
+    }
+
+    .btn-search:hover {
+        color: white;
+        text-shadow: 0 0 5px var(--t1-red);
+    }
 </style>
 </head>
 <body>
-
-<div class="container">
+    
+    <div class="container">
     <div class="header-box">
         <h1>BOARD <span>LIST</span></h1>
-        <a href="/board/insertForm" class="btn-write">New Mission</a>
+        <a href="/board/boardList" class="btn-write">새로고침</a>
+        <a href="/board/insertForm" class="btn-write">게시판입력</a>
+    </div>
+
+    <div class="search-container">
+        <form action="/board/search" method="get" class="search-form">
+            <select name="searchType" class="search-select">
+                <option value="title">TITLE</option>
+                <option value="writer">WRITER</option>
+                <option value="content">CONTENT</option>
+            </select>
+            <input type="text" name="keyword" class="search-input" placeholder="Search mission...">
+            <button type="submit" class="btn-search">SEARCH</button>
+        </form>
     </div>
 
     <table class="t1-table">
@@ -150,6 +219,11 @@
             </c:choose>
         </tbody>
     </table>
+
+    <div class="table-footer">
+        [ SYSTEM: CONNECTED TO JDBCBOARD_SEQ.NEXTVAL ]
+    </div>
 </div>
+
 </body>
 </html>
